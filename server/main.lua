@@ -131,7 +131,13 @@ exports('isValidPlayer', isValidPlayer)
 function getPlayersInRadioChannel(channel)
 	local returnChannel = radioData[channel]
 	if returnChannel then
-		return returnChannel
+		local data = {}
+
+		for source, isTalking in pairs(returnChannel) do
+			table.insert(data, tonumber(source))
+		end
+
+		return data
 	end
 	-- channel doesnt exist
 	return {}
