@@ -66,6 +66,7 @@ function addPlayerToRadio(source, radioChannel)
 	voiceData[source].radio = radioChannel
 	radioData[radioChannel][source] = false
 	TriggerClientEvent('pma-voice:syncRadioData', source, radioData[radioChannel], GetConvarInt("voice_syncPlayerNames", 0) == 1 and plyName)
+	TriggerEvent("pma-voice:playerAddedToRadio", source, radioChannel)
 end
 
 --- removes a player from the specified channel
@@ -80,6 +81,7 @@ function removePlayerFromRadio(source, radioChannel)
 	radioData[radioChannel][source] = nil
 	voiceData[source] = voiceData[source] or defaultTable(source)
 	voiceData[source].radio = 0
+	TriggerEvent("pma-voice:playerRemovedFromRadio", source, radioChannel)
 end
 
 -- TODO: Implement this in a way that allows players to be on multiple channels
